@@ -1,0 +1,7 @@
+v0.1.0
+- Create the project and add these major files:
+    - include.h
+    - sdl2-cpp/utility.hpp
+    - sdl2-cpp/point.hpp
+    - sdl2-cpp/rect.hpp
+    - sdl2-cpp/sdl2-cpp.h
