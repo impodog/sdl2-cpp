@@ -5,7 +5,7 @@
 #ifndef SDL2_CPP_UTILITY_HPP
 #define SDL2_CPP_UTILITY_HPP
 
-#include "../include.h"
+#include "except.hpp"
 
 namespace sdl2::utility
 {
@@ -86,6 +86,16 @@ namespace sdl2::utility
     constexpr T square(const T &value)
     {
         return value * value;
+    }
+
+    constexpr long long framerate_to_delay(double framerate)
+    {
+        return static_cast<long long>(1000 / framerate);
+    }
+
+    constexpr double delay_to_framerate(long long delay)
+    {
+        return 1000.0 / static_cast<double>(delay);
     }
 }
 

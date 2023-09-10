@@ -27,6 +27,10 @@ namespace sdl2::rect_base
         RECT_ALIAS(T, P)
     public:
         // Constructors
+        RectBase()
+                : T{0, 0, 0, 0}
+        {}
+
         RectBase(ArithmeticRef w, ArithmeticRef h)
                 : T{0, 0, w, h}
         {}
@@ -105,18 +109,27 @@ namespace sdl2::rect_base
     public:
         RectCalculations(ArithmeticRef x, ArithmeticRef y, ArithmeticRef w, ArithmeticRef h)
                 : T{x, y, w, h}
-        {}
+        {
+            this->normalize();
+        }
 
         SDL2_CPP_IMPLICIT RectCalculations(const T &other)
                 : T(other.x, other.y, other.w, other.h)
         {}
 
-        RectCalculations &expand(const P &center, ArithmeticRef factor)
+        RectCalculations &expand(const P &center, double factor)
         {
-            this->x = center.x - (center.x - this->x) * factor;
-            this->y = center.y - (center.y - this->y) * factor;
-            this->w = this->w * factor;
-            this->h = this->h * factor;
+            this->x = static_cast<ArithmeticType>(center.x - (center.x - this->x) * factor);
+            this->y = static_cast<ArithmeticType>(center.y - (center.y - this->y) * factor);
+            this->w = static_cast<ArithmeticType>(this->w * factor);
+            this->h = static_cast<ArithmeticType>(this->h * factor);
+            return *this;
+        }
+
+        RectCalculations &expand(double factor)
+        {
+            this->w = static_cast<ArithmeticType>(this->w * factor);
+            this->h = static_cast<ArithmeticType>(this->h * factor);
             return *this;
         }
 
@@ -127,41 +140,61 @@ namespace sdl2::rect_base
             return *this;
         }
 
-        P center() const
+        RectCalculations &normalize()
+        {
+            if (this->w < 0)
+            {
+                this->x += this->w;
+                this->w = -this->w;
+            }
+            if (this->h < 0)
+            {
+                this->y += this->h;
+                this->h = -this->h;
+            }
+            return *this;
+        }
+
+        [[nodiscard]] P center() const
         {
             return P(this->x + this->w / 2, this->y + this->h / 2);
         }
 
-        P area() const
+        [[nodiscard]] P area() const
         {
             return P(this->w, this->h);
         }
 
-        P position() const
+        [[nodiscard]] P position() const
         {
             return P(this->x, this->y);
         }
 
-        ArithmeticType area_size() const
+        [[nodiscard]] ArithmeticType area_size() const
         {
             return this->w * this->h;
         }
 
-        bool contains(const P &p) const
+        [[nodiscard]] bool contains(const P &p) const
         {
             return this->x <= p.x && p.x <= this->x + this->w && this->y <= p.y && p.y <= this->y + this->h;
         }
 
-        bool contains(const T &other) const
+        [[nodiscard]] bool contains(const T &other) const
         {
             return this->x <= other.x && other.x + other.w <= this->x + this->w &&
                    this->y <= other.y && other.y + other.h <= this->y + this->h;
         }
 
-        bool intersects(const T &other) const
+        [[nodiscard]] bool intersects(const T &other) const
         {
             return this->x < other.x + other.w && other.x < this->x + this->w &&
                    this->y < other.y + other.h && other.y < this->y + this->h;
+        }
+
+        [[nodiscard]] bool empty() const
+        {
+            return this->w == 0 || this->h == 0;
         }
     };
 

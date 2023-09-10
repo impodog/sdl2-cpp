@@ -1,3 +1,14 @@
+v0.2.0
+- Add more features:
+    - sdl2-cpp/window.hpp
+    - sdl2-cpp/renderer.hpp
+    - sdl2-cpp/texture.hpp
+    - sdl2-cpp/surface.hpp
+    - sdl2-cpp/event.hpp
+    - sdl2-cpp/keyboard.hpp
+    - image-cpp/image-cpp.hpp
+    - ttf-cpp/ttf-cpp.hpp
+
 v0.1.0
 - Create the project and add these major files:
     - include.h
