@@ -273,7 +273,7 @@ namespace sdl2::window
         }
     };
 
-    std::unique_ptr<Window> make_window(SDL_Window *window)
+    inline std::unique_ptr<Window> make_window(SDL_Window *window)
     {
         return std::unique_ptr<Window>{new Window(window)};
     }

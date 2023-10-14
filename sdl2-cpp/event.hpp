@@ -63,7 +63,7 @@ namespace sdl2::event
         }
     };
 
-    void push_event(SDL_Event *event)
+    inline void push_event(SDL_Event *event)
     {
         if (SDL_PushEvent(event))
         {

@@ -211,7 +211,7 @@ namespace sdl2::ttf
         }
     };
 
-    std::unique_ptr<Font> make_font(TTF_Font *ptr)
+    inline std::unique_ptr<Font> make_font(TTF_Font *ptr)
     {
         return std::unique_ptr<Font>{new Font(ptr)};
     }

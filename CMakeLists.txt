@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 project(sdl2_cpp)
 
-set(PROJECT_VERSION 0.1.0)
+set(PROJECT_VERSION 0.2.1)
 add_definitions(-DSDL2_CPP_VERSION="${PROJECT_VERSION}")
 
 set(CMAKE_CXX_STANDARD 20)

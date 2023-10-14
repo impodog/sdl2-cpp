@@ -129,7 +129,7 @@ namespace sdl2::texture
         }
     };
 
-    std::unique_ptr<Texture> make_texture(SDL_Texture *texture)
+    inline std::unique_ptr<Texture> make_texture(SDL_Texture *texture)
     {
         return std::unique_ptr<Texture>{new Texture(texture)};
     }
@@ -143,7 +143,7 @@ namespace sdl2
 
 namespace sdl2::renderer
 {
-    void Renderer::set_target(const ::sdl2::texture::Texture &texture) const
+    inline void Renderer::set_target(const ::sdl2::texture::Texture &texture) const
     {
         if (SDL_SetRenderTarget(renderer, texture.get()))
         {
@@ -151,7 +151,7 @@ namespace sdl2::renderer
         }
     }
 
-    void Renderer::copy(const ::sdl2::texture::Texture &texture, const Rect &src_rect, const Rect &dst_rect) const
+    inline void Renderer::copy(const ::sdl2::texture::Texture &texture, const Rect &src_rect, const Rect &dst_rect) const
     {
         if (SDL_RenderCopy(renderer, texture.get(), &src_rect, &dst_rect))
         {
@@ -159,7 +159,7 @@ namespace sdl2::renderer
         }
     }
 
-    void Renderer::copy(const Texture &texture, const Rect &dst_rect) const
+    inline void Renderer::copy(const Texture &texture, const Rect &dst_rect) const
     {
         if (SDL_RenderCopy(renderer, texture.get(), nullptr, &dst_rect))
         {
@@ -167,7 +167,7 @@ namespace sdl2::renderer
         }
     }
 
-    void Renderer::copy(const Texture &texture) const
+    inline void Renderer::copy(const Texture &texture) const
     {
         if (SDL_RenderCopy(renderer, texture.get(), nullptr, nullptr))
         {

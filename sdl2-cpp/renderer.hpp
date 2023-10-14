@@ -200,7 +200,7 @@ namespace sdl2::renderer
         }
     };
 
-    std::unique_ptr<Renderer> make_renderer(SDL_Renderer *renderer)
+    inline std::unique_ptr<Renderer> make_renderer(SDL_Renderer *renderer)
     {
         return std::unique_ptr<Renderer>{new Renderer(renderer)};
     }

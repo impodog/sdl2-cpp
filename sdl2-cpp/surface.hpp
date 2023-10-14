@@ -124,7 +124,7 @@ namespace sdl2::surface
         }
     };
 
-    std::unique_ptr<Surface> make_surface(SDL_Surface *surface)
+    inline std::unique_ptr<Surface> make_surface(SDL_Surface *surface)
     {
         return std::unique_ptr<Surface>{new Surface(surface)};
     }
@@ -138,7 +138,7 @@ namespace sdl2
 
 namespace sdl2::window
 {
-    std::unique_ptr<::sdl2::surface::Surface> Window::get_surface() const
+    inline std::unique_ptr<::sdl2::surface::Surface> Window::get_surface() const
     {
         return surface::make_surface(SDL_GetWindowSurface(ptr));
     }
