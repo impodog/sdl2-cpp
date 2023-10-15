@@ -13,8 +13,10 @@
 #include <chrono>
 #include <concepts>
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <memory>
+#include <queue>
 #include <stdexcept>
 #include <string>
 #include <tuple>
